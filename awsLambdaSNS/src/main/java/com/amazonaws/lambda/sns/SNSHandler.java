@@ -19,9 +19,11 @@ public class SNSHandler implements RequestHandler<SNSEvent, String> {
         context.getLogger().log("Received event: " + event);
         String  stsMessage = event.getRecords().get(0).getSNS().getMessage();
         context.getLogger().log("From SNS: " + stsMessage);
+        context.getLogger().log("Initialiazing message attributes..." );
         Map<String, MessageAttribute> attributes = event.getRecords().get(0).getSNS().getMessageAttributes();
+        context.getLogger().log("Message attributes: " + attributes );
         context.getLogger().log("Invoking RestClient from lambda... " );
-        Response response = restClient.getResponse(attributes);        
+        Response response = restClient.getResponse(attributes, context);        
         return response.toString();
     }
 }
