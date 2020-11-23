@@ -30,6 +30,10 @@ public class RestClient {
 		
 		context.getLogger().log("REST_URI: " + REST_URI );
 		
+		context.getLogger().log("Response status code: " + client.target(REST_URI).request(MediaType.APPLICATION_JSON).get().getStatus());
+		
+		context.getLogger().log("Response body: " + client.target(REST_URI).request(MediaType.APPLICATION_JSON).get().readEntity(String.class));
+				
         return client.target(REST_URI).request(MediaType.APPLICATION_JSON).get();
         		
     }
